@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-pod
+  labels:
+    purpose: demonstrate-args
+spec:
+  containers:
+  - name: busybox-container
+    image: busybox
+    command: ["/bin/sh", "-c"]
+    args: ["echo 'Hello Kubernetes' && sleep 100"]
