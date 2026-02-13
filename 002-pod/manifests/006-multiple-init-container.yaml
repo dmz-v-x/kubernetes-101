@@ -14,3 +14,32 @@ spec:
   - name: main-container
     image: busybox
     command: ['sleep', '3600']
+
+---
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  selector:
+    app: demo1
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: myservice
+spec:
+  selector:
+    app: demo2
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
