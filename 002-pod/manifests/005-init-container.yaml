@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-container
+spec:
+  volumes:
+    - name: shared-data
+      emptyDir: {}
+  initContainers:
+    - name: bootcamp-init
+      image: busybox
+      command:
+        [
+          "sh",
+          "-c",
+          "wget -O /usr/share/data/index.html http://kubesimplify.com && sleep 10",
+        ]
+      volumeMounts:
+        - name: shared-data
+          mountPath: /usr/share/data
+  containers:
+    - name: nginx-container
+      image: nginx
+      volumeMounts:
+        - name: shared-data
+          mountPath: /usr/share/nginx/html
